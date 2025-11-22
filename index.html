@@ -3,108 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S4riX - Modern Portfolio V2</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>S4riX - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        :root {
-            --black: #000000;
-            --dark-blue: #1e3a8a;
-            --blue: #3b82f6;
-            --light-blue: #60a5fa;
-            --sky-blue: #7dd3fc;
+            cursor: none;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--black);
-            color: var(--sky-blue);
-            line-height: 1.6;
+            font-family: -apple-system, BlinkMacSystemFont, 'Rajdhani', sans-serif;
+            background: #000000;
+            color: #b8b8b8;
+            min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
         }
 
-        body, a, button {
-            cursor: none !important;
-        }
-
-        /* Animated background with parallax */
-        .background-wrapper {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .bg-image {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            min-width: 110%;
-            min-height: 110%;
-            width: auto;
-            height: auto;
-            object-fit: cover;
-            opacity: 0.45;
-            filter: blur(3px);
-            transition: transform 0.1s ease-out;
-        }
-
-        .bg-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(30,58,138,0.7) 100%);
-        }
-
-        /* Grid overlay */
-        .grid-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(rgba(59, 130, 246, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(59, 130, 246, 0.02) 1px, transparent 1px);
-            background-size: 100px 100px;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        /* Custom cursor */
-        .cursor {
+        /* Custom Cursor */
+        .custom-cursor {
             position: fixed;
             width: 20px;
             height: 20px;
-            border: 2px solid var(--blue);
+            border: 2px solid #9b59b6;
             border-radius: 50%;
             pointer-events: none;
             z-index: 9999;
-            transition: 0.1s;
-            box-shadow: 0 0 20px var(--blue);
+            transition: 0.15s ease;
+            box-shadow: 0 0 20px #9b59b6;
         }
 
-        .cursor-trail {
+        .cursor-dot {
             position: fixed;
             width: 8px;
             height: 8px;
-            background: var(--light-blue);
+            background: #9b59b6;
             border-radius: 50%;
             pointer-events: none;
             z-index: 9998;
-            box-shadow: 0 0 15px var(--light-blue);
+            box-shadow: 0 0 10px #9b59b6;
+        }
+
+        /* Background Image */
+        .bg-image-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: #000000;
+        }
+
+        .bg-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+        }
+
+        /* Rain Effect */
+        .rain-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .rain {
+            position: absolute;
+            width: 2px;
+            height: 50px;
+            background: linear-gradient(to bottom, transparent, rgba(138, 43, 226, 0.6), transparent);
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        /* Purple Gradient Overlay */
+        .purple-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(138, 43, 226, 0.2), transparent 50%);
+            z-index: 2;
+            pointer-events: none;
         }
 
         .container {
@@ -112,149 +109,147 @@
             margin: 0 auto;
             padding: 0 40px;
             position: relative;
-            z-index: 1;
+            z-index: 10;
         }
 
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(20px);
-            z-index: 1000;
-            padding: 1.5rem 0;
-            border-bottom: 1px solid var(--dark-blue);
-            transition: all 0.3s ease;
-        }
-
-        nav.scrolled {
-            box-shadow: 0 5px 30px rgba(59, 130, 246, 0.3);
-        }
-
-        nav .container {
+        /* Header */
+        header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 2rem 0;
+            position: relative;
+            z-index: 100;
         }
 
         .logo {
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-size: 2rem;
-            font-weight: 700;
-            color: var(--sky-blue);
-            letter-spacing: -1px;
-            transition: all 0.3s ease;
+            font-weight: 900;
+            color: #9b59b6;
+            text-shadow: 0 0 20px #9b59b6;
+            letter-spacing: 3px;
         }
 
-        .logo:hover {
-            transform: scale(1.05);
-            text-shadow: 0 0 20px var(--blue);
-        }
-
-        .nav-links {
+        nav {
             display: flex;
-            list-style: none;
             gap: 3rem;
         }
 
-        .nav-links a {
-            color: var(--sky-blue);
+        nav a {
+            color: #b8b8b8;
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
+            font-size: 1rem;
+            transition: color 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
+        }
+
+        nav a:hover {
+            color: #9b59b6;
+            text-shadow: 0 0 10px #9b59b6;
+        }
+
+        /* Main Content */
+        main {
             position: relative;
+            z-index: 10;
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--blue);
-            transition: width 0.3s ease;
+        .content {
+            text-align: center;
+            padding: 3rem 0;
+            position: relative;
+            z-index: 10;
         }
 
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .nav-links a:hover {
-            color: var(--light-blue);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
+        /* Profile Picture Section */
+        .profile-section {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            padding-top: 100px;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 100px;
-            align-items: center;
-            opacity: 0;
-            animation: fadeIn 1s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
-
-        .hero-text {
-            position: relative;
-        }
-
-        .hero-text h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 5rem;
-            font-weight: 700;
-            line-height: 1.1;
             margin-bottom: 2rem;
-            color: var(--sky-blue);
-            letter-spacing: -2px;
-            animation: slideInLeft 0.8s ease;
         }
 
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        .profile-picture {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 4px solid #9b59b6;
+            box-shadow: 0 0 40px rgba(155, 89, 182, 0.6);
+            margin-bottom: 1.5rem;
+            object-fit: cover;
+            transition: all 0.4s ease;
         }
 
-        .hero-text .accent {
-            color: var(--blue);
-            display: block;
+        .profile-picture:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 60px rgba(155, 89, 182, 0.8);
+        }
+
+        .tag.box {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            background: linear-gradient(90deg, #9b59b6, #8e44ad, #9b59b6);
+            background-size: 200% 100%;
+            animation: gradient-slide 3s linear infinite;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 20px rgba(155, 89, 182, 0.4);
+        }
+
+        @keyframes gradient-slide {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        .content h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            color: white;
+            margin-bottom: 1rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-shadow: 0 0 40px #9b59b6;
+        }
+
+        .description {
+            font-size: 1.3rem;
+            color: #b8b8b8;
+            max-width: 700px;
+            margin: 0 auto 1rem;
+            line-height: 1.8;
+        }
+
+        /* Typing Effect */
+        .typing-container {
+            min-height: 2.5em;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .typing-text {
-            font-size: 1.2rem;
-            color: var(--light-blue);
-            margin-bottom: 2rem;
-            min-height: 1.5em;
-            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            color: #9b59b6;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 20px #9b59b6;
         }
 
         .typing-cursor {
             display: inline-block;
             width: 3px;
-            height: 1.2em;
-            background: var(--blue);
+            height: 1.5em;
+            background: #9b59b6;
             animation: blink 1s infinite;
             margin-left: 5px;
+            box-shadow: 0 0 10px #9b59b6;
         }
 
         @keyframes blink {
@@ -262,370 +257,340 @@
             51%, 100% { opacity: 0; }
         }
 
-        .hero-text p {
-            font-size: 1.2rem;
-            color: var(--light-blue);
-            margin-bottom: 3rem;
-            max-width: 500px;
-            line-height: 1.8;
-            animation: slideInLeft 0.8s ease 0.2s backwards;
-        }
-
-        .hero-badges {
+        .buttons {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            animation: slideInLeft 0.8s ease 0.3s backwards;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 3rem;
         }
 
-        .badge {
-            padding: 0.5rem 1rem;
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid var(--dark-blue);
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: var(--sky-blue);
-            transition: all 0.3s ease;
-        }
-
-        .badge:hover {
-            background: rgba(59, 130, 246, 0.2);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: var(--blue);
-            color: var(--black);
+        .buttons button {
             padding: 1.2rem 3rem;
-            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
             font-weight: 600;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
             transition: all 0.3s ease;
-            border: 2px solid var(--blue);
-            animation: slideInLeft 0.8s ease 0.4s backwards;
-        }
-
-        .cta-button:hover {
+            border: 2px solid #9b59b6;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             background: transparent;
-            color: var(--blue);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+            color: #9b59b6;
         }
 
-        .hero-image-container {
-            position: relative;
-            height: 600px;
-            animation: slideInRight 0.8s ease;
+        .buttons button:hover {
+            background: #9b59b6;
+            color: white;
+            box-shadow: 0 0 30px rgba(155, 89, 182, 0.6);
+            transform: translateY(-3px);
         }
 
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        /* Video Section */
+        .video-section {
+            margin: 3rem 0;
+            display: flex;
+            justify-content: center;
         }
 
-        .image-wrapper {
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 450px;
-            height: 450px;
-        }
-
-        .geometric-bg {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            border: 2px solid var(--dark-blue);
-            top: -25px;
-            right: -25px;
-            z-index: 1;
+        .video-container {
+            width: 100%;
+            max-width: 800px;
+            aspect-ratio: 16/9;
+            border: 4px solid #9b59b6;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(155, 89, 182, 0.5);
             transition: all 0.4s ease;
         }
 
-        .image-wrapper:hover .geometric-bg {
-            border-color: var(--blue);
-            transform: translate(10px, 10px);
+        .video-container:hover {
+            box-shadow: 0 0 60px rgba(155, 89, 182, 0.8);
+            transform: scale(1.02);
         }
 
-        .profile-image {
+        .video-container iframe {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            position: relative;
-            z-index: 2;
-            transition: all 0.4s ease;
+            border: none;
         }
 
-        .image-wrapper:hover .profile-image {
-            transform: translate(10px, 10px);
-        }
-
-        /* Section styling */
-        section {
-            padding: 8rem 0;
+        /* Sections */
+        .circles-section {
+            padding: 5rem 0;
             position: relative;
         }
 
-        .section-header {
-            margin-bottom: 5rem;
+        .section-title {
             text-align: center;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            color: #9b59b6;
+            margin-bottom: 4rem;
+            text-shadow: 0 0 30px #9b59b6;
+            font-weight: 900;
+            letter-spacing: 3px;
         }
 
-        .section-header.visible {
-            opacity: 1;
-            transform: translateY(0);
+        /* Large Info Circles */
+        .large-circles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 4rem;
+            margin-top: 5rem;
+            justify-items: center;
         }
 
-        .section-number {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1rem;
-            color: var(--blue);
-            font-weight: 600;
-            margin-bottom: 1rem;
+        .large-circle {
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.15), rgba(0, 0, 0, 0.9));
+            border: 4px solid #9b59b6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 40px rgba(155, 89, 182, 0.3);
+        }
+
+        .large-circle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 80px rgba(155, 89, 182, 0.6);
+        }
+
+        .large-circle i {
+            font-size: 3.5rem;
+            color: #9b59b6;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 30px #9b59b6;
+        }
+
+        .large-circle h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 2rem;
+            font-weight: 700;
             letter-spacing: 2px;
         }
 
-        h2 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 3.5rem;
-            color: var(--sky-blue);
-            font-weight: 700;
-            letter-spacing: -1px;
+        .large-circle ul {
+            list-style: none;
+            text-align: center;
+            width: 100%;
         }
 
-        /* About Grid */
-        .about-grid {
+        .large-circle ul li {
+            padding: 0.7rem 0;
+            color: #b8b8b8;
+            font-size: 1rem;
+            border-bottom: 1px solid rgba(155, 89, 182, 0.2);
+        }
+
+        .large-circle ul li:last-child {
+            border-bottom: none;
+        }
+
+        /* App/AI Cards in Rectangles */
+        .cards-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
         }
 
-        .about-card {
-            background: rgba(59, 130, 246, 0.03);
-            border: 1px solid var(--dark-blue);
+        .app-card {
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.1), rgba(0, 0, 0, 0.8));
+            border: 2px solid #9b59b6;
+            border-radius: 20px;
             padding: 3rem;
-            transition: all 0.3s ease;
-            position: relative;
-            opacity: 0;
-            transform: translateY(30px);
+            transition: all 0.4s ease;
+            box-shadow: 0 0 30px rgba(155, 89, 182, 0.2);
         }
 
-        .about-card.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .app-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 60px rgba(155, 89, 182, 0.5);
+            border-color: #bf59ff;
         }
 
-        .about-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 0;
-            background: var(--blue);
-            transition: height 0.3s ease;
-        }
-
-        .about-card:hover::before {
-            height: 100%;
-        }
-
-        .about-card:hover {
-            background: rgba(59, 130, 246, 0.08);
-            border-color: var(--blue);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(59, 130, 246, 0.3);
-        }
-
-        .about-card h3 {
-            font-family: 'Space Grotesk', sans-serif;
-            color: var(--light-blue);
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-            font-weight: 600;
+        .app-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: #9b59b6;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
             display: flex;
             align-items: center;
             gap: 1rem;
         }
 
-        .about-card h3 i {
-            color: var(--blue);
-            font-size: 1.8rem;
+        .app-card h3 i {
+            font-size: 2rem;
         }
 
-        .about-card ul {
+        .app-card ul {
             list-style: none;
         }
 
-        .about-card ul li {
-            padding: 0.8rem 0;
-            color: var(--sky-blue);
-            font-size: 1.05rem;
-            position: relative;
-            padding-left: 2rem;
+        .app-card ul li {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(155, 89, 182, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
             transition: all 0.3s ease;
         }
 
-        .about-card ul li a {
-            color: var(--sky-blue);
-            text-decoration: none;
-            transition: all 0.3s ease;
+        .app-card ul li:hover {
+            padding-left: 1rem;
+            color: #bf59ff;
         }
 
-        .about-card ul li::before {
+        .app-card ul li::before {
             content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--blue);
-            font-weight: 600;
-            transition: all 0.3s ease;
+            color: #9b59b6;
+            font-weight: bold;
+            font-size: 1.2rem;
         }
 
-        .about-card ul li:hover,
-        .about-card ul li:hover a {
-            color: var(--light-blue);
-            padding-left: 2.5rem;
-        }
-
-        .about-card ul li:hover::before {
-            transform: translateX(5px);
-        }
-
-        /* Social Grid */
-        .social-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .social-card {
-            background: transparent;
-            border: 1px solid var(--dark-blue);
-            padding: 4rem 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
+        .app-card ul li a {
+            color: #b8b8b8;
             text-decoration: none;
-            color: inherit;
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(30px);
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+            flex: 1;
         }
 
-        .social-card.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .app-card ul li:hover a {
+            color: #bf59ff;
         }
 
-        .social-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 0;
-            background: var(--dark-blue);
-            transition: height 0.3s ease;
-            z-index: 0;
+        /* Social Circles */
+        .social-circles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+            justify-items: center;
         }
 
-        .social-card:hover::after {
-            height: 100%;
+        .social-circle {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.15), rgba(0, 0, 0, 0.8));
+            border: 3px solid #9b59b6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            box-shadow: 0 0 30px rgba(155, 89, 182, 0.3);
         }
 
-        .social-card:hover {
-            border-color: var(--blue);
-            transform: translateY(-10px);
-            box-shadow: 0 15px 50px rgba(59, 130, 246, 0.4);
+        .social-circle:hover {
+            transform: scale(1.15);
+            box-shadow: 0 0 60px rgba(155, 89, 182, 0.7);
+            border-color: #bf59ff;
         }
 
-        .social-card * {
-            position: relative;
-            z-index: 1;
-        }
-
-        .social-card i {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            color: var(--blue);
+        .social-circle i {
+            font-size: 3.5rem;
+            color: #9b59b6;
+            margin-bottom: 1.2rem;
             transition: all 0.3s ease;
+            text-shadow: 0 0 20px #9b59b6;
         }
 
-        .social-card:hover i {
-            color: var(--light-blue);
-            transform: scale(1.15) rotateY(360deg);
+        .social-circle:hover i {
+            transform: rotateY(360deg);
+            color: #bf59ff;
         }
 
-        .social-card h3 {
-            font-family: 'Space Grotesk', sans-serif;
-            margin-bottom: 0.8rem;
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--sky-blue);
+        .social-circle h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: white;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: 1px;
         }
 
-        .social-card p {
-            color: var(--light-blue);
-            font-size: 1rem;
+        /* Zilan Team Links */
+        .zilan-team {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.2), rgba(0, 0, 0, 0.9));
+            border: 2px solid #9b59b6;
+            border-radius: 15px;
+            padding: 1.5rem;
+            z-index: 100;
+            box-shadow: 0 0 30px rgba(155, 89, 182, 0.4);
+            backdrop-filter: blur(10px);
         }
 
-        /* Decorative elements */
-        .deco-line {
-            width: 100px;
-            height: 2px;
-            background: var(--blue);
-            margin: 0 auto 3rem;
+        .zilan-team h4 {
+            font-family: 'Orbitron', sans-serif;
+            color: #9b59b6;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            letter-spacing: 1px;
         }
 
-        /* Mobile */
-        @media (max-width: 1024px) {
-            .hero-grid {
+        .zilan-team ul {
+            list-style: none;
+        }
+
+        .zilan-team ul li {
+            margin: 0.8rem 0;
+        }
+
+        .zilan-team ul li a {
+            color: #b8b8b8;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .zilan-team ul li a::before {
+            content: "▶";
+            color: #9b59b6;
+            font-size: 0.8rem;
+        }
+
+        .zilan-team ul li a:hover {
+            color: #9b59b6;
+            padding-left: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1300px) {
+            .large-circle {
+                width: 450px;
+                height: 450px;
+            }
+
+            .cards-grid {
                 grid-template-columns: 1fr;
-                gap: 50px;
-            }
-
-            .hero-text h1 {
-                font-size: 3.5rem;
-            }
-
-            .image-wrapper {
-                position: relative;
-                margin: 0 auto;
-                width: 350px;
-                height: 350px;
-            }
-
-            .geometric-bg {
-                width: 400px;
-                height: 400px;
-            }
-
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .social-grid {
-                grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (max-width: 768px) {
-            .nav-links {
+            * {
+                cursor: auto;
+            }
+
+            .custom-cursor, .cursor-dot {
                 display: none;
             }
 
@@ -633,36 +598,76 @@
                 padding: 0 20px;
             }
 
-            .hero-text h1 {
+            header {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .content h1 {
+                font-size: 3rem;
+            }
+
+            .section-title {
                 font-size: 2.5rem;
             }
 
-            h2 {
-                font-size: 2.5rem;
+            .profile-picture {
+                width: 150px;
+                height: 150px;
             }
 
-            .social-grid {
-                grid-template-columns: 1fr;
+            .buttons {
+                flex-direction: column;
+                align-items: center;
             }
 
-            .image-wrapper {
-                width: 280px;
-                height: 280px;
+            .buttons button {
+                width: 100%;
+                max-width: 300px;
             }
 
-            .geometric-bg {
+            .large-circle {
                 width: 320px;
                 height: 320px;
-            }
-
-            .about-card,
-            .social-card {
                 padding: 2rem;
             }
 
-            .cursor,
-            .cursor-trail {
-                display: none;
+            .large-circle h3 {
+                font-size: 1.5rem;
+            }
+
+            .large-circle ul li {
+                font-size: 0.9rem;
+                padding: 0.6rem 0;
+            }
+
+            .large-circles {
+                grid-template-columns: 1fr;
+            }
+
+            .social-circles {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .social-circle {
+                width: 180px;
+                height: 180px;
+            }
+
+            .video-container {
+                max-width: 100%;
+            }
+
+            .zilan-team {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 1rem;
             }
         }
 
@@ -672,88 +677,90 @@
     </style>
 </head>
 <body>
-    <div class="background-wrapper">
-        <img src="shizuka.png" alt="Background" class="bg-image" id="bgImage">
-        <div class="bg-overlay"></div>
-    </div>
-    <div class="grid-overlay"></div>
-    <div class="cursor"></div>
-    
-    <nav id="navbar">
-        <div class="container">
-            <div class="logo">S4riX</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#socials">Connect</a></li>
-            </ul>
-        </div>
-    </nav>
+    <div class="custom-cursor"></div>
+    <div class="cursor-dot"></div>
 
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-grid">
-                <div class="hero-text">
-                    <h1>
-                        Hi, I'm
-                        <span class="accent">S4riX</span>
-                    </h1>
-                    <div class="typing-text">
-                        <span id="typingText"></span><span class="typing-cursor"></span>
-                    </div>
-                    <p>14-year-old content creator and developer from Switzerland. Working for Zilan. Also known as Sarikaze and Sintand.</p>
-                    <div class="hero-badges">
-                        <span class="badge">🎮 Gamer</span>
-                        <span class="badge">💻 Developer</span>
-                        <span class="badge">🎥 Creator</span>
-                        <span class="badge">🌐 Portfolio_V2</span>
-                    </div>
-                    <a href="#about" class="cta-button">Explore My Work</a>
+    <div class="bg-image-container">
+        <img src="shadow.jpg" alt="Background" id="bgImage">
+    </div>
+
+    <div class="rain-container" id="rainContainer"></div>
+    <div class="purple-overlay"></div>
+
+    <div class="container">
+        <header>
+            <h1 class="logo">S4RiX</h1>
+            <nav>
+                <a href="#about">About</a>
+                <a href="#apps">Apps & AI</a>
+                <a href="#socials">Connect</a>
+                <a href="https://legal.zilan.dev" target="_blank">Legal</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content">
+                <div class="profile-section" data-aos="fade-down">
+                    <img src="profile.jpg" alt="S4riX Profile" class="profile-picture" id="profilePic">
                 </div>
                 
-                <div class="hero-image-container">
-                    <div class="image-wrapper">
-                        <div class="geometric-bg"></div>
-                        <img src="Sarikaze.png" alt="Sarikaze" class="profile-image" id="profileImg">
+                <div class="tag box" data-aos="fade-down" data-aos-delay="100">Digital Creator & Developer</div>
+                <h1 data-aos="fade-down" data-aos-delay="150">Welcome to my Portfolio</h1>
+                <p class="description" data-aos="fade-down" data-aos-delay="200">
+                    14-year-old content creator and developer from Switzerland. Working for Zilan Group. 
+                    Building the future, one line of code at a time.
+                </p>
+                <div class="typing-container" data-aos="fade-down" data-aos-delay="250">
+                    <span class="typing-text" id="typingText"></span><span class="typing-cursor"></span>
+                </div>
+                <div class="buttons" data-aos="fade-zoom-in" data-aos-delay="300">
+                    <button onclick="window.location.href='#about'">Learn More</button>
+                    <button onclick="window.location.href='#socials'">Connect</button>
+                </div>
+
+                <div class="video-section" data-aos="fade-up" data-aos-delay="400">
+                    <div class="video-container">
+                        <iframe src="https://burnt.rip/shadow_fan_atomic" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </main>
 
-    <section id="about">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-number">01 — ABOUT</div>
-                <h2>Who I Am</h2>
-                <div class="deco-line"></div>
-            </div>
-            <div class="about-grid">
-                <div class="about-card">
-                    <h3><i class="fas fa-user"></i> Personal</h3>
+        <section id="about" class="circles-section">
+            <h2 class="section-title" data-aos="fade-down">● WHO I AM ●</h2>
+            
+            <div class="large-circles">
+                <div class="large-circle" data-aos="fade-zoom-in" data-aos-delay="100">
+                    <i class="fas fa-user-astronaut"></i>
+                    <h3>Personal Info</h3>
                     <ul>
-                        <li>Name: S4riX</li>
+                        <li>S4riX</li>
                         <li>Age: 14 years old</li>
-                        <li>Location: Switzerland 🇨🇭</li>
+                        <li>Switzerland 🇨🇭</li>
                         <li>Working for: Zilan Group</li>
                         <li>Vibe: Chill, nice & funny</li>
                         <li>Developer of ZilanOS</li>
-                        <li>Shizuka Yoshimoto 💗</li>
-                        <li>Single🥀💔</li>
                     </ul>
                 </div>
-                
-                <div class="about-card">
-                    <h3><i class="fas fa-heart"></i> Hobbies</h3>
+
+                <div class="large-circle" data-aos="fade-zoom-in" data-aos-delay="200">
+                    <i class="fas fa-heart"></i>
+                    <h3>My Hobbies</h3>
                     <ul>
-                        <li>Content Creation</li>
-                        <li>Coding</li>
-                        <li>Gaming</li>
-                        <li>Music Listening</li>
+                        <li>Content Creation 🎥</li>
+                        <li>Coding 💻</li>
+                        <li>Gaming 🎮</li>
+                        <li>Music Listening 🎵</li>
                     </ul>
                 </div>
-                
-                <div class="about-card">
+            </div>
+        </section>
+
+        <section id="apps" class="circles-section">
+            <h2 class="section-title" data-aos="fade-down">● MY FAVORITES ●</h2>
+            
+            <div class="cards-grid">
+                <div class="app-card" data-aos="fade-up" data-aos-delay="100">
                     <h3><i class="fas fa-mobile-alt"></i> Favorite Apps</h3>
                     <ul>
                         <li><a href="https://youtube.com" target="_blank">YouTube</a></li>
@@ -762,8 +769,8 @@
                         <li><a href="https://tiktok.com" target="_blank">TikTok</a></li>
                     </ul>
                 </div>
-                
-                <div class="about-card">
+
+                <div class="app-card" data-aos="fade-up" data-aos-delay="200">
                     <h3><i class="fas fa-robot"></i> Favorite AI</h3>
                     <ul>
                         <li><a href="https://claude.ai" target="_blank">ClaudeAI</a></li>
@@ -773,141 +780,126 @@
                     </ul>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="socials">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-number">02 — CONNECT</div>
-                <h2>Let's Connect</h2>
-                <div class="deco-line"></div>
-            </div>
-            <div class="social-grid">
-                <a href="https://youtube.com/@sintand_yt" target="_blank" class="social-card">
+        <section id="socials" class="circles-section">
+            <h2 class="section-title" data-aos="fade-down">● LET'S CONNECT ●</h2>
+            
+            <div class="social-circles">
+                <a href="https://youtube.com/@sintand_yt" target="_blank" class="social-circle" data-aos="fade-zoom-in" data-aos-delay="100">
                     <i class="fab fa-youtube"></i>
                     <h3>YouTube</h3>
-                    <p>Watch my videos</p>
                 </a>
-                
-                <a href="https://www.tiktok.com/@s4rix_ar?_t=ZN-8zghz5FZaMw&_r=1" target="_blank" class="social-card">
+
+                <a href="https://www.tiktok.com/@s4rix_ar?_t=ZN-8zghz5FZaMw&_r=1" target="_blank" class="social-circle" data-aos="fade-zoom-in" data-aos-delay="150">
                     <i class="fab fa-tiktok"></i>
                     <h3>TikTok</h3>
-                    <p>Follow for content</p>
                 </a>
-                
-                <a href="https://www.instagram.com/husiar_27?igsh=dTh1enYwYjE1OWpr&utm_source=qr" target="_blank" class="social-card">
+
+                <a href="https://www.instagram.com/husiar_27?igsh=dTh1enYwYjE1OWpr&utm_source=qr" target="_blank" class="social-circle" data-aos="fade-zoom-in" data-aos-delay="200">
                     <i class="fab fa-instagram"></i>
                     <h3>Instagram</h3>
-                    <p>Check my stories</p>
                 </a>
-                
-                <a href="#" class="social-card">
+
+                <a href="#" class="social-circle" data-aos="fade-zoom-in" data-aos-delay="250">
                     <i class="fab fa-discord"></i>
                     <h3>Discord</h3>
-                    <p>Chat with me</p>
                 </a>
 
-                <a href="https://s4rixzilandev.github.io/" target="_blank" class="social-card">
+                <a href="https://s4rixzilandev.github.io/" target="_blank" class="social-circle" data-aos="fade-zoom-in" data-aos-delay="300">
                     <i class="fas fa-gamepad"></i>
-                    <h3>S4rixs Gaming Zone</h3>
-                    <p>Visit my website</p>
+                    <h3>Gaming Zone</h3>
                 </a>
-                
-                <a href="https://s4rixzilandev.github.io/sarikaze_created_songs//" target="_blank" class="social-card">
-                    <i class="fas fa-music"></i>
-                    <h3>Sarikaze Created Songs</h3>
-                    <p>Wanna listen to cool songs! Then visit this website!</p>
 
-                <a href="https://legal.zilan.dev//" target="_blank" class="social-card">
+                <a href="https://s4rixzilandev.github.io/sarikaze_created_songs/" target="_blank" class="social-circle" data-aos="fade-zoom-in" data-aos-delay="350">
+                    <i class="fas fa-music"></i>
+                    <h3>Music</h3>
+                </a>
+
+                <a href="https://legal.zilan.dev/" target="_blank" class="social-circle" data-aos="fade-zoom-in" data-aos-delay="400">
                     <i class="fas fa-scale-balanced"></i>
-                    <h3>© ZilanGroup 2025</h3>
-                    <p>Legal Information</p>
+                    <h3>Legal Info</h3>
                 </a>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
+    <!-- Zilan Team Links -->
+    <div class="zilan-team" data-aos="fade-left">
+        <h4>Zilan Team</h4>
+        <ul>
+            <li><a href="https://zilan.dev/" target="_blank">Development Team</a></li>
+            <li><a href="https://miyako.zilan.dev/" target="_blank">Miyako (Owner)</a></li>
+            <li><a href="https://drakurim.zilan.dev/" target="_blank">Drakurim (Co-Owner)</a></li>
+        </ul>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Custom cursor with trail
-        const cursor = document.querySelector('.cursor');
-        const trails = [];
-        let mouseX = 0;
-        let mouseY = 0;
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out',
+            once: true,
+            offset: 100
+        });
+
+        // Custom Cursor
+        const cursor = document.querySelector('.custom-cursor');
+        const cursorDot = document.querySelector('.cursor-dot');
+        
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+        let dotX = 0, dotY = 0;
 
         document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
-            
-            cursor.style.left = e.clientX - 10 + 'px';
-            cursor.style.top = e.clientY - 10 + 'px';
-            
-            const trail = document.createElement('div');
-            trail.className = 'cursor-trail';
-            trail.style.left = e.clientX - 4 + 'px';
-            trail.style.top = e.clientY - 4 + 'px';
-            document.body.appendChild(trail);
-            
-            trails.push(trail);
-            
-            setTimeout(() => {
-                trail.style.opacity = '0';
-                trail.style.transform = 'scale(0)';
-            }, 10);
-            
-            setTimeout(() => {
-                trail.remove();
-                trails.shift();
-            }, 500);
-            
-            if (trails.length > 20) {
-                trails[0].remove();
-                trails.shift();
+        });
+
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.2;
+            cursorY += (mouseY - cursorY) * 0.2;
+            dotX += (mouseX - dotX) * 0.15;
+            dotY += (mouseY - dotY) * 0.15;
+
+            cursor.style.left = cursorX - 10 + 'px';
+            cursor.style.top = cursorY - 10 + 'px';
+            cursorDot.style.left = dotX - 4 + 'px';
+            cursorDot.style.top = dotY - 4 + 'px';
+
+            requestAnimationFrame(animateCursor);
+        }
+
+        animateCursor();
+
+        // Rain Effect - Real Rain Drops
+        function createRain() {
+            const rainContainer = document.getElementById('rainContainer');
+            const numberOfDrops = 50;
+
+            for (let i = 0; i < numberOfDrops; i++) {
+                const drop = document.createElement('div');
+                drop.classList.add('rain');
+                drop.style.left = Math.random() * 100 + '%';
+                drop.style.animationDuration = Math.random() * 2 + 1 + 's';
+                drop.style.animationDelay = Math.random() * 2 + 's';
+                rainContainer.appendChild(drop);
             }
-        });
+        }
 
-        // Parallax background
-        const bgImage = document.getElementById('bgImage');
-        document.addEventListener('mousemove', (e) => {
-            const x = (e.clientX / window.innerWidth - 0.5) * 30;
-            const y = (e.clientY / window.innerHeight - 0.5) * 30;
-            bgImage.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
-        });
+        createRain();
 
-        // Load images
-        window.addEventListener('load', () => {
-            const profileImg = document.getElementById('profileImg');
-            const bgImg = document.getElementById('bgImage');
-            
-            if (window.fs && window.fs.readFile) {
-                async function loadImages() {
-                    // Profile image
-                    const profileNames = ['image.jpg', 'car.jpg', 'profile.jpg', 'photo.jpg'];
-                    for (const filename of profileNames) {
-                        try {
-                            const data = await window.fs.readFile(filename);
-                            const blob = new Blob([data], { type: 'image/jpeg' });
-                            const url = URL.createObjectURL(blob);
-                            profileImg.src = url;
-                            bgImg.src = url;
-                            break;
-                        } catch (err) {}
-                    }
-                }
-                loadImages();
-            }
-        });
-
-        // Typing effect
+        // Typing Effect
         const texts = [
-            "Content Creator & Developer",
-            "Working for Zilan",
             "Also known as Sarikaze/Sintand",
-            "Single and had 0 Releationships",
+            "Building ZilanOS",
+            "Content Creator & Gamer",
             "14 years old from Switzerland 🇨🇭",
-            "Building awesome websites",
-            "Gaming Enthusiast 🎮"
+            "Developer for Zilan Group",
+            "Creating awesome projects"
         ];
+        
         let textIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
@@ -915,13 +907,13 @@
 
         function typeEffect() {
             const currentText = texts[textIndex];
-            
+
             if (isDeleting) {
-                typingElement.textContent = currentText.substring(0, charIndex - 1);
                 charIndex--;
+                typingElement.textContent = currentText.substring(0, charIndex);
             } else {
-                typingElement.textContent = currentText.substring(0, charIndex + 1);
                 charIndex++;
+                typingElement.textContent = currentText.substring(0, charIndex);
             }
 
             let speed = isDeleting ? 50 : 100;
@@ -940,59 +932,37 @@
 
         setTimeout(typeEffect, 1000);
 
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
+        // Load Images
+        window.addEventListener('load', () => {
+            const bgImg = document.getElementById('bgImage');
+            const profilePic = document.getElementById('profilePic');
+            
+            if (window.fs && window.fs.readFile) {
+                async function loadImages() {
+                    // Background
+                    const bgNames = ['shadow.jpg', 'shadow.png', 'background.jpg'];
+                    for (const filename of bgNames) {
+                        try {
+                            const data = await window.fs.readFile(filename);
+                            const blob = new Blob([data], { type: 'image/jpeg' });
+                            const url = URL.createObjectURL(blob);
+                            bgImg.src = url;
+                            break;
+                        } catch (err) {}
+                    }
+
+                    // Profile Picture
+                    const profileNames = ['profile.jpg', 'profile.png', 'sarikaze.jpg', 'sarikaze.png', 'image.jpg'];
+                    for (const filename of profileNames) {
+                        try {
+                            const data = await window.fs.readFile(filename);
+                            const blob = new Blob([data], { type: 'image/jpeg' });
+                            const url = URL.createObjectURL(blob);
+                            profilePic.src = url;
+                            break;
+                        } catch (err) {}
+                    }
                 }
-            });
-        });
-
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, index * 100);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.section-header, .about-card, .social-card').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
+                loadImages();
             }
         });
-
-        // Add hover effects
-        document.querySelectorAll('.about-card, .social-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                if (!this.classList.contains('social-card')) {
-                    this.style.transform = 'translateY(0)';
-                }
-            });
-        });
-    </script>
-</body>
-</html>
