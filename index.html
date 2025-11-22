@@ -15,11 +15,27 @@
 
         body {
             font-family: 'Rajdhani', sans-serif;
-            background: linear-gradient(135deg, #1a0033 0%, #000000 50%, #1a0033 100%);
+            background: #000000;
             color: #b8b8b8;
             min-height: 100vh;
             overflow-x: hidden;
             cursor: none;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('shadow.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            z-index: -1;
         }
 
         /* Custom Cursor */
@@ -133,19 +149,15 @@
             box-shadow: 0 0 40px rgba(155, 89, 182, 0.6);
             margin: 0 auto 1.5rem;
             background: linear-gradient(135deg, #9b59b6, #8e44ad);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            color: white;
             transition: all 0.4s ease;
+            overflow: hidden;
         }
 
         .profile-picture img {
             width: 100%;
             height: 100%;
-            border-radius: 50%;
             object-fit: cover;
+            display: block;
         }
 
         .profile-picture:hover {
@@ -564,7 +576,9 @@
         <main>
             <div class="content">
                 <div class="profile-section">
-                    <div class="profile-picture" id="profilePic">S4</div>
+                    <div class="profile-picture">
+                        <img src="Sarikaze.png" alt="S4riX Profile">
+                    </div>
                 </div>
                 
                 <div class="tag-box">Digital Creator & Developer</div>
@@ -579,12 +593,6 @@
                 <div class="buttons">
                     <button onclick="window.location.href='#about'">Learn More</button>
                     <button onclick="window.location.href='#socials'">Connect</button>
-                </div>
-
-                <div class="video-section">
-                    <div class="video-container">
-                        <iframe src="https://burnt.rip/shadow_fan_atomic" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    </div>
                 </div>
             </div>
         </main>
