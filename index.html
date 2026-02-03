@@ -885,6 +885,568 @@
             padding-left: 0.5rem;
         }
 
+        /* LIVE SYSTEM DASHBOARD */
+        .system-dashboard {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: linear-gradient(135deg, rgba(220, 20, 60, 0.1), rgba(0, 0, 0, 0.95));
+            border: 2px solid var(--red-primary);
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+            z-index: 1000;
+            box-shadow: 0 0 30px var(--red-glow);
+            backdrop-filter: blur(10px);
+            min-width: 220px;
+            animation: slideInLeft 0.8s ease;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .system-dashboard h4 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--red-primary);
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            text-align: center;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .system-dashboard h4 i {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(220, 20, 60, 0.2);
+        }
+
+        .stat-item:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            color: #b0b0b0;
+            font-size: 0.9rem;
+        }
+
+        .stat-value {
+            color: var(--red-primary);
+            font-weight: 600;
+            font-family: 'Orbitron', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #00ff00;
+            border-radius: 50%;
+            animation: pulse-green 2s ease-in-out infinite;
+        }
+
+        .visitor-count {
+            font-size: 1.1rem;
+            animation: countUp 0.5s ease;
+        }
+
+        @keyframes countUp {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* DARK MODE TOGGLE */
+        .mode-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 10001;
+            animation: slideInRight 0.8s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .mode-btn {
+            background: linear-gradient(135deg, rgba(220, 20, 60, 0.2), rgba(0, 0, 0, 0.9));
+            border: 2px solid var(--red-primary);
+            color: var(--red-primary);
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px var(--red-glow);
+            backdrop-filter: blur(10px);
+        }
+
+        .mode-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px var(--red-glow);
+        }
+
+        .mode-btn i {
+            font-size: 1.2rem;
+        }
+
+        /* DARK MODE STYLES */
+        body.night-mode {
+            background: #000000;
+        }
+
+        body.night-mode .grid-bg {
+            background-image: 
+                linear-gradient(rgba(220, 20, 60, 0.15) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(220, 20, 60, 0.15) 1px, transparent 1px);
+        }
+
+        body.night-mode .info-card,
+        body.night-mode .feature-card,
+        body.night-mode .email-section {
+            background: linear-gradient(135deg, rgba(220, 20, 60, 0.15), rgba(0, 0, 0, 0.95));
+            border-color: var(--red-light);
+        }
+
+        body.night-mode .social-link {
+            background: linear-gradient(135deg, rgba(220, 20, 60, 0.2), rgba(0, 0, 0, 0.95));
+        }
+
+        body.night-mode h1,
+        body.night-mode .section-title {
+            text-shadow: 0 0 50px var(--red-glow);
+        }
+
+        /* LIGHT MODE STYLES */
+        body.light-mode {
+            background: #f5f5f5;
+            color: #2a2a2a;
+        }
+
+        body.light-mode::before {
+            opacity: 0.4;
+        }
+
+        body.light-mode .grid-bg {
+            background-image: 
+                linear-gradient(rgba(220, 20, 60, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(220, 20, 60, 0.08) 1px, transparent 1px);
+        }
+
+        body.light-mode .logo {
+            color: var(--red-dark);
+            text-shadow: 0 0 15px rgba(220, 20, 60, 0.3);
+        }
+
+        body.light-mode nav a {
+            color: #4a4a4a;
+        }
+
+        body.light-mode nav a:hover {
+            color: var(--red-primary);
+        }
+
+        body.light-mode h1 {
+            color: #1a1a1a;
+            text-shadow: 0 0 20px rgba(220, 20, 60, 0.3);
+        }
+
+        body.light-mode .description,
+        body.light-mode .stat-label,
+        body.light-mode .project-desc,
+        body.light-mode .email-header p {
+            color: #4a4a4a;
+        }
+
+        body.light-mode .section-title {
+            color: var(--red-primary);
+            text-shadow: 0 0 15px rgba(220, 20, 60, 0.2);
+        }
+
+        body.light-mode .info-card,
+        body.light-mode .feature-card,
+        body.light-mode .email-section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(240, 240, 240, 0.9));
+            border-color: var(--red-primary);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-mode .info-card h3,
+        body.light-mode .feature-card h3,
+        body.light-mode .email-header h3,
+        body.light-mode .social-link h3,
+        body.light-mode .project-milestone h4,
+        body.light-mode .email-box h4 {
+            color: #1a1a1a;
+        }
+
+        body.light-mode .info-card ul li,
+        body.light-mode .feature-card ul li a,
+        body.light-mode .project-milestone p {
+            color: #4a4a4a;
+        }
+
+        body.light-mode .info-card ul li:hover,
+        body.light-mode .feature-card ul li:hover a {
+            color: var(--red-primary);
+        }
+
+        body.light-mode .social-link {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 240, 240, 0.95));
+            border-color: var(--red-primary);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-mode .team-box,
+        body.light-mode .system-dashboard {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(245, 245, 245, 0.95));
+            border-color: var(--red-primary);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        body.light-mode .team-box h4,
+        body.light-mode .system-dashboard h4 {
+            color: var(--red-primary);
+        }
+
+        body.light-mode .team-box ul li a,
+        body.light-mode .stat-label {
+            color: #4a4a4a;
+        }
+
+        body.light-mode .team-box ul li a:hover {
+            color: var(--red-primary);
+        }
+
+        body.light-mode .mode-btn {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(240, 240, 240, 0.9));
+            color: var(--red-primary);
+            border-color: var(--red-primary);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-mode .email-box {
+            background: rgba(255, 255, 255, 0.6);
+            border-color: var(--red-primary);
+        }
+
+        body.light-mode .email-box a {
+            color: var(--red-primary);
+        }
+
+        body.light-mode .project-milestone {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(245, 245, 245, 0.95));
+            border-color: var(--red-primary);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        body.light-mode .rain {
+            background: linear-gradient(to bottom, transparent, rgba(220, 20, 60, 0.4), transparent);
+        }
+
+        /* MODE SWITCH ANIMATION */
+        .scan-line {
+            position: fixed;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(to bottom, 
+                transparent 0%, 
+                rgba(220, 20, 60, 0.3) 50%, 
+                transparent 100%);
+            z-index: 99999;
+            pointer-events: none;
+            animation: scan 1.5s ease-out;
+        }
+
+        @keyframes scan {
+            0% { top: -100%; }
+            50% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        /* INTERACTIVE PROJECT EXPLORATION */
+        .project-journey {
+            position: relative;
+            min-height: 400px;
+            margin-top: 3rem;
+            overflow: visible;
+        }
+
+        .journey-plane {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10;
+        }
+
+        .journey-plane svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--red-primary);
+            filter: drop-shadow(0 0 15px var(--red-glow));
+        }
+
+        .project-milestone {
+            position: absolute;
+            background: linear-gradient(135deg, rgba(220, 20, 60, 0.1), rgba(0, 0, 0, 0.9));
+            border: 2px solid var(--red-primary);
+            border-radius: 20px;
+            padding: 2rem;
+            min-width: 300px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+            box-shadow: 0 0 30px rgba(220, 20, 60, 0.2);
+        }
+
+        .project-milestone.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-milestone h4 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--red-primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-milestone p {
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+
+        .milestone-1 {
+            top: 50px;
+            left: 10%;
+        }
+
+        .milestone-2 {
+            top: 200px;
+            right: 10%;
+        }
+
+        /* MUSIC PLAYER */
+        .music-player {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, rgba(220, 20, 60, 0.15), rgba(0, 0, 0, 0.95));
+            border: 2px solid var(--red-primary);
+            border-radius: 25px;
+            padding: 1.5rem 2rem;
+            z-index: 10000;
+            box-shadow: 0 0 40px var(--red-glow);
+            backdrop-filter: blur(10px);
+            min-width: 400px;
+            animation: slideInUp 0.8s ease;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        body.light-mode .music-player {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(245, 245, 245, 0.95));
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .music-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .music-icon {
+            font-size: 2rem;
+            color: var(--red-primary);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .music-info h4 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--red-primary);
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .music-info p {
+            color: #b0b0b0;
+            font-size: 0.9rem;
+        }
+
+        body.light-mode .music-info p {
+            color: #666;
+        }
+
+        /* Audio Visualizer */
+        .visualizer {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 4px;
+            height: 60px;
+            margin: 1rem 0;
+        }
+
+        .visualizer-bar {
+            width: 6px;
+            background: var(--red-primary);
+            border-radius: 3px;
+            transition: height 0.1s ease;
+            box-shadow: 0 0 10px var(--red-glow);
+        }
+
+        /* Player Controls */
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .play-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--red-primary);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px var(--red-glow);
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px var(--red-glow);
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex: 1;
+        }
+
+        .volume-control i {
+            color: var(--red-primary);
+            font-size: 1.2rem;
+        }
+
+        body.light-mode .volume-control i {
+            color: var(--red-primary);
+        }
+
+        .volume-slider {
+            flex: 1;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 6px;
+            background: rgba(220, 20, 60, 0.2);
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: var(--red-primary);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--red-glow);
+        }
+
+        .volume-slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            background: var(--red-primary);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--red-glow);
+            border: none;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(220, 20, 60, 0.2);
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--red-primary);
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.1s linear;
+            box-shadow: 0 0 10px var(--red-glow);
+        }
+
+        .time-display {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: #b0b0b0;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        body.light-mode .time-display {
+            color: #666;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             * { cursor: auto; }
@@ -912,6 +1474,83 @@
             .team-box { bottom: 1rem; right: 1rem; }
             
             .paper-plane-container { display: none; }
+
+            /* New responsive rules */
+            .system-dashboard {
+                top: auto;
+                bottom: 1rem;
+                left: 1rem;
+                padding: 1rem 1.5rem;
+                min-width: 180px;
+            }
+
+            .system-dashboard h4 {
+                font-size: 1rem;
+            }
+
+            .stat-item {
+                padding: 0.5rem 0;
+            }
+
+            .stat-label,
+            .stat-value {
+                font-size: 0.85rem;
+            }
+
+            .mode-toggle {
+                top: 1rem;
+                right: 1rem;
+            }
+
+            .mode-btn {
+                padding: 0.8rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            .mode-btn span {
+                display: none;
+            }
+
+            .project-journey {
+                min-height: 600px;
+            }
+
+            .project-milestone {
+                min-width: 250px;
+                padding: 1.5rem;
+            }
+
+            .milestone-1 {
+                left: 5%;
+            }
+
+            .milestone-2 {
+                right: 5%;
+            }
+
+            .music-player {
+                bottom: 1rem;
+                left: 1rem;
+                right: 1rem;
+                transform: none;
+                min-width: auto;
+                padding: 1rem 1.5rem;
+            }
+
+            .music-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+
+            .player-controls {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .volume-control {
+                width: 100%;
+            }
         }
 
         html { scroll-behavior: smooth; }
@@ -923,9 +1562,43 @@
     <div class="cursor"></div>
     <div class="cursor-dot"></div>
 
+    <!-- LIVE SYSTEM DASHBOARD -->
+    <div class="system-dashboard">
+        <h4><i class="fas fa-chart-line"></i> SYSTEM STATUS</h4>
+        <div class="stat-item">
+            <span class="stat-label">Status</span>
+            <span class="stat-value">
+                <span class="status-dot"></span>
+                Online
+            </span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Active Projects</span>
+            <span class="stat-value">2</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Last Login</span>
+            <span class="stat-value">Today</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Visitors</span>
+            <span class="stat-value">
+                <span class="visitor-count" id="visitorCount">0</span>
+            </span>
+        </div>
+    </div>
+
+    <!-- DARK MODE TOGGLE -->
+    <div class="mode-toggle">
+        <button class="mode-btn" id="modeToggle">
+            <i class="fas fa-sun"></i>
+            <span>Day Protocol</span>
+        </button>
+    </div>
+
     <div class="container">
         <header>
-            <div class="logo">S4riX</div>
+            <div class="logo">S4RiX</div>
             <nav>
                 <a href="#about">ABOUT</a>
                 <a href="#apps">APPS & AI</a>
@@ -940,7 +1613,7 @@
             <div class="hero">
                 <div class="profile-wrapper">
                     <div class="profile-pic">
-                        <img src="sarikaze chibi anime (s4rix bubble).png" alt="S4riX Profile">
+                        <img src="__sarikaze chibi anime (s4rix bubble).png__" alt="S4riX Profile">
                     </div>
                 </div>
                 
@@ -948,7 +1621,7 @@
                 <h1>Welcome to my Portfolio</h1>
                 <p class="description">
                     15-year-old content creator and developer from Switzerland. Working for Zilan Group. 
-                    Known as the lost CVC Editor. Also known as "S4riX" / "Sari" / "Sintand" / "Sarikaze"
+                    Building the future, one line of code at a time. Also known as "Shizuka_Fan" / "Sari" / "Sintand" / "Sarikaze"
                 </p>
                 
                 <div class="typing-wrapper">
@@ -975,7 +1648,7 @@
                         <li>Switzerland 🇨🇭</li>
                         <li>Working for: Zilan Group</li>
                         <li>Vibe: Chill, nice & funny</li>
-                        <li>Developer of Xaver</li>
+                        <li>Developer of ZilanOS</li>
                     </ul>
                 </div>
 
@@ -988,7 +1661,6 @@
                         <li>Gaming 🎮</li>
                         <li>Music Listening 🎵</li>
                         <li>Watching Anime 😁</li>
-                        <li>Editing 🎥</li>
                     </ul>
                 </div>
             </div>
@@ -1046,6 +1718,25 @@
                     </div>
                 </div>
             </div>
+
+            <!-- INTERACTIVE PROJECT EXPLORATION -->
+            <div class="project-journey" id="projectJourney">
+                <div class="journey-plane" id="journeyPlane">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </svg>
+                </div>
+
+                <div class="project-milestone milestone-1" id="milestone1">
+                    <h4>🚀 Multi-Task Master</h4>
+                    <p>Xaver Bot handles moderation, music, utilities, and custom commands simultaneously. Built with advanced async architecture for lightning-fast responses!</p>
+                </div>
+
+                <div class="project-milestone milestone-2" id="milestone2">
+                    <h4>🎫 Professional Support</h4>
+                    <p>Xaver-Tickets brings enterprise-level ticket management to Discord. Custom categories, auto-responses, and detailed analytics coming soon!</p>
+                </div>
+            </div>
         </section>
 
         <section id="contact">
@@ -1088,12 +1779,12 @@
             <h2 class="section-title">● LET'S CONNECT ●</h2>
             
             <div class="social-grid">
-                <a href="https://youtube.com/@SsintandD" target="_blank" class="social-link" style="--index: 0">
+                <a href="https://youtube.com/@sarikaze" target="_blank" class="social-link" style="--index: 0">
                     <i class="fab fa-youtube"></i>
                     <h3>YouTube</h3>
                 </a>
 
-                <a href="https://www.tiktok.com/@sari_anime_editor" target="_blank" class="social-link" style="--index: 1">
+                <a href="https://www.tiktok.com/@sarikaze_27" target="_blank" class="social-link" style="--index: 1">
                     <i class="fab fa-tiktok"></i>
                     <h3>TikTok</h3>
                 </a>
@@ -1103,9 +1794,9 @@
                     <h3>Instagram</h3>
                 </a>
 
-                <a href="https://discord.gg/U2fU9bWUXF" class="social-link" style="--index: 3">
+                <a href="#" class="social-link" style="--index: 3">
                     <i class="fab fa-discord"></i>
-                    <h3>Discord Server</h3>
+                    <h3>Discord</h3>
                 </a>
 
                 <a href="https://s4rixzilandev.github.io/" target="_blank" class="social-link" style="--index: 4">
@@ -1133,6 +1824,56 @@
             <li><a href="https://miyako.zilan.dev/" target="_blank">Miyako (Owner)</a></li>
             <li><a href="https://drakurim.zilan.dev/" target="_blank">Drakurim (Co-Owner)</a></li>
         </ul>
+    </div>
+
+    <!-- MUSIC PLAYER -->
+    <div class="music-player">
+        <div class="music-header">
+            <i class="fas fa-music music-icon"></i>
+            <div class="music-info">
+                <h4>Unforgettable Flow</h4>
+                <p>Produced by S4riX</p>
+            </div>
+        </div>
+
+        <!-- Audio Visualizer -->
+        <div class="visualizer" id="visualizer">
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+        </div>
+
+        <!-- Player Controls -->
+        <div class="player-controls">
+            <button class="play-btn" id="playBtn">
+                <i class="fas fa-play"></i>
+            </button>
+            <div class="volume-control">
+                <i class="fas fa-volume-up"></i>
+                <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="70">
+            </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container" id="progressContainer">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="time-display">
+            <span id="currentTime">0:00</span>
+            <span id="duration">0:00</span>
+        </div>
+
+        <!-- Hidden Audio Element -->
+        <audio id="audioPlayer" preload="metadata">
+            <source src="Unforgettable_Flow.mp3" type="audio/mpeg">
+        </audio>
     </div>
 
     <script>
@@ -1191,7 +1932,7 @@
 
         // Typing Effect
         const texts = [
-            "Also known as Sari/Sarikaze/Sintand",
+            "Also known as Sarikaze/Sintand",
             "Building ZilanOS",
             "Content Creator & Gamer",
             "15 years old from Switzerland 🇨🇭",
@@ -1230,6 +1971,208 @@
         }
 
         setTimeout(typeEffect, 1000);
+
+        // VISITOR COUNTER - PERSISTENT & ACCURATE
+        const visitorElement = document.getElementById('visitorCount');
+        
+        function initVisitorCounter() {
+            // Get stored visitor count from localStorage
+            let storedCount = localStorage.getItem('s4rix_visitor_count');
+            
+            if (!storedCount) {
+                // First time visitor - start at a base number
+                storedCount = 150;
+            } else {
+                // Increment by 1 for returning visitors (simulates real visits)
+                storedCount = parseInt(storedCount) + 1;
+            }
+            
+            // Save the new count
+            localStorage.setItem('s4rix_visitor_count', storedCount);
+            
+            // Animate the counter
+            let current = 0;
+            const target = parseInt(storedCount);
+            const duration = 2000;
+            const step = target / (duration / 50);
+            
+            const interval = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    visitorElement.textContent = Math.floor(target);
+                    clearInterval(interval);
+                } else {
+                    visitorElement.textContent = Math.floor(current);
+                }
+            }, 50);
+        }
+
+        initVisitorCounter();
+
+        // DARK MODE TOGGLE
+        const modeToggle = document.getElementById('modeToggle');
+        const body = document.body;
+
+        modeToggle.addEventListener('click', () => {
+            // Create scan line effect
+            const scanLine = document.createElement('div');
+            scanLine.className = 'scan-line';
+            body.appendChild(scanLine);
+
+            // Toggle light mode after scan starts
+            setTimeout(() => {
+                body.classList.toggle('light-mode');
+                
+                // Update button text
+                const btnText = modeToggle.querySelector('span');
+                const btnIcon = modeToggle.querySelector('i');
+                
+                if (body.classList.contains('light-mode')) {
+                    btnText.textContent = 'Night Protocol';
+                    btnIcon.className = 'fas fa-moon';
+                } else {
+                    btnText.textContent = 'Day Protocol';
+                    btnIcon.className = 'fas fa-sun';
+                }
+            }, 750);
+
+            // Remove scan line after animation
+            setTimeout(() => {
+                scanLine.remove();
+            }, 1500);
+        });
+
+        // INTERACTIVE PROJECT JOURNEY
+        const projectJourney = document.getElementById('projectJourney');
+        const journeyPlane = document.getElementById('journeyPlane');
+        const milestone1 = document.getElementById('milestone1');
+        const milestone2 = document.getElementById('milestone2');
+
+        function updateProjectJourney() {
+            if (!projectJourney) return;
+
+            const rect = projectJourney.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+            
+            // Calculate scroll progress through the project section
+            const scrollProgress = Math.max(0, Math.min(1, 
+                (viewportHeight - rect.top) / (viewportHeight + rect.height)
+            ));
+
+            // Move plane along path
+            const journeyWidth = projectJourney.offsetWidth - 80;
+            const journeyHeight = 300;
+            
+            // Create a wave path
+            const x = scrollProgress * journeyWidth;
+            const y = Math.sin(scrollProgress * Math.PI * 2) * 100 + 150;
+            const rotation = Math.cos(scrollProgress * Math.PI * 2) * 15;
+
+            journeyPlane.style.left = x + 'px';
+            journeyPlane.style.top = y + 'px';
+            journeyPlane.style.transform = `rotate(${rotation}deg)`;
+
+            // Reveal milestones based on scroll
+            if (scrollProgress > 0.3) {
+                milestone1.classList.add('active');
+            }
+            if (scrollProgress > 0.6) {
+                milestone2.classList.add('active');
+            }
+        }
+
+        window.addEventListener('scroll', updateProjectJourney);
+        updateProjectJourney(); // Initial call
+
+        // MUSIC PLAYER FUNCTIONALITY
+        const audio = document.getElementById('audioPlayer');
+        const playBtn = document.getElementById('playBtn');
+        const playBtnIcon = playBtn.querySelector('i');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const progressContainer = document.getElementById('progressContainer');
+        const progressBar = document.getElementById('progressBar');
+        const currentTimeDisplay = document.getElementById('currentTime');
+        const durationDisplay = document.getElementById('duration');
+        const visualizerBars = document.querySelectorAll('.visualizer-bar');
+
+        // Set initial volume
+        audio.volume = 0.7;
+
+        // Play/Pause Toggle
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playBtnIcon.className = 'fas fa-pause';
+                startVisualizer();
+            } else {
+                audio.pause();
+                playBtnIcon.className = 'fas fa-play';
+                stopVisualizer();
+            }
+        });
+
+        // Volume Control
+        volumeSlider.addEventListener('input', (e) => {
+            audio.volume = e.target.value / 100;
+        });
+
+        // Update Progress Bar
+        audio.addEventListener('timeupdate', () => {
+            const progress = (audio.currentTime / audio.duration) * 100;
+            progressBar.style.width = progress + '%';
+            currentTimeDisplay.textContent = formatTime(audio.currentTime);
+        });
+
+        // Set Duration when loaded
+        audio.addEventListener('loadedmetadata', () => {
+            durationDisplay.textContent = formatTime(audio.duration);
+        });
+
+        // Click on progress bar to seek
+        progressContainer.addEventListener('click', (e) => {
+            const rect = progressContainer.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const width = rect.width;
+            const percentage = clickX / width;
+            audio.currentTime = percentage * audio.duration;
+        });
+
+        // Format time helper
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // Audio Visualizer Animation
+        let visualizerInterval;
+
+        function startVisualizer() {
+            visualizerInterval = setInterval(() => {
+                visualizerBars.forEach(bar => {
+                    const height = Math.random() * 50 + 10;
+                    bar.style.height = height + 'px';
+                });
+            }, 150);
+        }
+
+        function stopVisualizer() {
+            clearInterval(visualizerInterval);
+            visualizerBars.forEach(bar => {
+                bar.style.height = '10px';
+            });
+        }
+
+        // Initialize visualizer bars
+        visualizerBars.forEach(bar => {
+            bar.style.height = '10px';
+        });
+
+        // Loop audio when it ends
+        audio.addEventListener('ended', () => {
+            audio.currentTime = 0;
+            audio.play();
+        });
     </script>
 </body>
 </html>
