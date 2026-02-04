@@ -899,6 +899,72 @@
             backdrop-filter: blur(10px);
             min-width: 220px;
             animation: slideInLeft 0.8s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Minimized State for Dashboard */
+        .system-dashboard.minimized {
+            min-width: 60px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .system-dashboard.minimized:hover {
+            transform: scale(1.1);
+        }
+
+        .system-dashboard.minimized .dashboard-content {
+            display: none;
+        }
+
+        .system-dashboard.minimized .dashboard-minimize-btn {
+            position: static;
+            transform: none;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+        }
+
+        .system-dashboard.minimized .dashboard-minimize-btn i {
+            font-size: 1.8rem;
+        }
+
+        .dashboard-content {
+            position: relative;
+        }
+
+        .dashboard-minimize-btn {
+            position: absolute;
+            top: -0.5rem;
+            right: -0.5rem;
+            background: rgba(220, 20, 60, 0.2);
+            border: 2px solid var(--red-primary);
+            color: var(--red-primary);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .dashboard-minimize-btn:hover {
+            background: var(--red-primary);
+            color: white;
+            transform: scale(1.15);
+        }
+
+        .dashboard-minimize-btn i {
+            font-size: 0.9rem;
         }
 
         @keyframes slideInLeft {
@@ -964,8 +1030,24 @@
         }
 
         .visitor-count {
-            font-size: 1.1rem;
-            animation: countUp 0.5s ease;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .dots::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+            display: inline-block;
+            width: 12px;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: ''; }
+            40% { content: '.'; }
+            60% { content: '..'; }
+            80%, 100% { content: '...'; }
         }
 
         @keyframes countUp {
@@ -976,7 +1058,7 @@
         /* DARK MODE TOGGLE */
         .mode-toggle {
             position: fixed;
-            top: 2rem;
+            bottom: 11rem;
             right: 2rem;
             z-index: 10001;
             animation: slideInRight 0.8s ease;
@@ -997,26 +1079,32 @@
             background: linear-gradient(135deg, rgba(220, 20, 60, 0.2), rgba(0, 0, 0, 0.9));
             border: 2px solid var(--red-primary);
             color: var(--red-primary);
-            padding: 1rem 1.5rem;
-            border-radius: 50px;
+            padding: 0;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             font-family: 'Orbitron', sans-serif;
             font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            justify-content: center;
             transition: all 0.3s ease;
             box-shadow: 0 0 20px var(--red-glow);
             backdrop-filter: blur(10px);
         }
 
         .mode-btn:hover {
-            transform: scale(1.05);
+            transform: scale(1.15);
             box-shadow: 0 0 40px var(--red-glow);
         }
 
         .mode-btn i {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+        }
+
+        .mode-btn span {
+            display: none;
         }
 
         /* DARK MODE STYLES */
@@ -1273,6 +1361,40 @@
             backdrop-filter: blur(10px);
             min-width: 400px;
             animation: slideInUp 0.8s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Minimized State */
+        .music-player.minimized {
+            min-width: 70px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .music-player.minimized:hover {
+            transform: translateX(-50%) scale(1.1);
+        }
+
+        .music-player.minimized .music-content {
+            display: none;
+        }
+
+        .music-player.minimized .minimize-btn {
+            position: static;
+            transform: none;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+        }
+
+        .music-player.minimized .minimize-btn i {
+            font-size: 2rem;
         }
 
         @keyframes slideInUp {
@@ -1289,6 +1411,38 @@
         body.light-mode .music-player {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(245, 245, 245, 0.95));
             box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .music-content {
+            position: relative;
+        }
+
+        .minimize-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: rgba(220, 20, 60, 0.2);
+            border: 2px solid var(--red-primary);
+            color: var(--red-primary);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .minimize-btn:hover {
+            background: var(--red-primary);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .minimize-btn i {
+            font-size: 1rem;
         }
 
         .music-header {
@@ -1452,89 +1606,271 @@
             * { cursor: auto; }
             .cursor, .cursor-dot { display: none; }
             
-            .container { padding: 0 20px; }
-            header { flex-direction: column; gap: 1.5rem; }
-            nav { flex-wrap: wrap; justify-content: center; gap: 1.5rem; }
+            .container { padding: 0 15px; }
             
-            h1 { font-size: 3rem; }
-            .section-title { font-size: 2.5rem; }
-            .profile-pic { width: 160px; height: 160px; }
+            header { 
+                flex-direction: column; 
+                gap: 1rem; 
+                padding: 1.5rem 0;
+            }
             
-            .btn-group { flex-direction: column; align-items: center; }
-            .btn { width: 100%; max-width: 300px; }
+            .logo {
+                font-size: 2rem;
+            }
             
-            .info-grid { grid-template-columns: 1fr; }
-            .feature-grid { grid-template-columns: 1fr; }
-            .social-grid { grid-template-columns: repeat(2, 1fr); }
-            .social-link { width: 150px; height: 150px; }
+            nav { 
+                flex-wrap: wrap; 
+                justify-content: center; 
+                gap: 1rem; 
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
             
-            .email-section { padding: 2rem; }
-            .email-boxes { grid-template-columns: 1fr; }
+            h1 { 
+                font-size: 2.5rem; 
+                line-height: 1.2;
+            }
             
-            .team-box { bottom: 1rem; right: 1rem; }
+            .section-title { 
+                font-size: 2rem; 
+                margin-bottom: 2.5rem;
+            }
+
+            .description {
+                font-size: 1.1rem;
+                padding: 0 10px;
+            }
+
+            .typing-wrapper {
+                min-height: 2rem;
+            }
+
+            .typing-text {
+                font-size: 1.2rem;
+            }
+            
+            .profile-pic { 
+                width: 140px; 
+                height: 140px; 
+            }
+            
+            .btn-group { 
+                flex-direction: column; 
+                align-items: stretch;
+                padding: 0 20px;
+                gap: 1rem;
+            }
+            
+            .btn { 
+                width: 100%; 
+                max-width: none;
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+            
+            .info-grid { 
+                grid-template-columns: 1fr; 
+                gap: 2rem;
+            }
+
+            .info-card {
+                max-width: 100%;
+                padding: 2rem;
+            }
+
+            .info-card .icon {
+                font-size: 3rem;
+            }
+
+            .info-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .info-card ul li {
+                font-size: 1rem;
+                padding: 0.8rem 0;
+            }
+            
+            .feature-grid { 
+                grid-template-columns: 1fr; 
+                gap: 2rem;
+            }
+
+            .feature-card {
+                padding: 2rem;
+            }
+
+            .feature-card h3 {
+                font-size: 1.5rem;
+            }
+            
+            .social-grid { 
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 1.5rem;
+            }
+            
+            .social-link { 
+                width: 140px; 
+                height: 140px; 
+            }
+
+            .social-link i {
+                font-size: 2.5rem;
+            }
+
+            .social-link h3 {
+                font-size: 1rem;
+            }
+            
+            .email-section { 
+                padding: 2rem 1.5rem; 
+                margin-top: 2rem;
+            }
+
+            .email-header h3 {
+                font-size: 2rem;
+            }
+
+            .email-header p {
+                font-size: 1rem;
+            }
+            
+            .email-boxes { 
+                grid-template-columns: 1fr; 
+                gap: 1.5rem;
+            }
+
+            .email-box {
+                padding: 1.5rem;
+            }
+
+            .email-box i {
+                font-size: 2.5rem;
+            }
+            
+            .team-box { 
+                bottom: 0.8rem; 
+                right: 0.8rem; 
+                padding: 1rem 1.3rem;
+                min-width: auto;
+            }
+
+            .team-box h4 {
+                font-size: 1.1rem;
+            }
+
+            .team-box ul li {
+                margin: 0.6rem 0;
+            }
+
+            .team-box ul li a {
+                font-size: 0.85rem;
+            }
             
             .paper-plane-container { display: none; }
 
-            /* New responsive rules */
+            /* System Dashboard Mobile */
             .system-dashboard {
-                top: auto;
-                bottom: 1rem;
+                top: 1rem;
                 left: 1rem;
-                padding: 1rem 1.5rem;
+                padding: 1rem 1.3rem;
                 min-width: 180px;
+            }
+
+            .system-dashboard.minimized {
+                width: 50px;
+                height: 50px;
+                min-width: 50px;
             }
 
             .system-dashboard h4 {
                 font-size: 1rem;
+                margin-bottom: 0.8rem;
             }
 
             .stat-item {
-                padding: 0.5rem 0;
+                padding: 0.6rem 0;
             }
 
             .stat-label,
             .stat-value {
-                font-size: 0.85rem;
+                font-size: 0.8rem;
             }
 
+            .dashboard-minimize-btn {
+                width: 26px;
+                height: 26px;
+            }
+
+            .dashboard-minimize-btn i {
+                font-size: 0.8rem;
+            }
+
+            /* Mode Toggle Mobile */
             .mode-toggle {
+                bottom: auto;
                 top: 1rem;
                 right: 1rem;
             }
 
             .mode-btn {
-                padding: 0.8rem 1.2rem;
-                font-size: 0.9rem;
+                width: 45px;
+                height: 45px;
+                padding: 0;
+            }
+
+            .mode-btn i {
+                font-size: 1.1rem;
             }
 
             .mode-btn span {
                 display: none;
             }
 
+            /* Project Journey Mobile */
             .project-journey {
-                min-height: 600px;
+                min-height: 500px;
             }
 
             .project-milestone {
-                min-width: 250px;
+                min-width: 90%;
+                max-width: 90%;
                 padding: 1.5rem;
+            }
+
+            .project-milestone h4 {
+                font-size: 1.3rem;
             }
 
             .milestone-1 {
                 left: 5%;
+                top: 30px;
             }
 
             .milestone-2 {
                 right: 5%;
+                top: 150px;
             }
 
+            /* Music Player Mobile */
             .music-player {
-                bottom: 1rem;
-                left: 1rem;
-                right: 1rem;
+                bottom: 0.8rem;
+                left: 0.8rem;
+                right: 0.8rem;
                 transform: none;
                 min-width: auto;
-                padding: 1rem 1.5rem;
+                padding: 1rem 1.2rem;
+            }
+
+            .music-player.minimized {
+                left: 50%;
+                right: auto;
+                transform: translateX(-50%);
+                width: 55px;
+                height: 55px;
+                bottom: 0.8rem;
             }
 
             .music-header {
@@ -1543,13 +1879,47 @@
                 gap: 0.5rem;
             }
 
+            .music-info h4 {
+                font-size: 1rem;
+            }
+
+            .music-info p {
+                font-size: 0.8rem;
+            }
+
+            .visualizer {
+                height: 50px;
+                gap: 3px;
+            }
+
+            .visualizer-bar {
+                width: 5px;
+            }
+
             .player-controls {
                 flex-direction: column;
-                gap: 1rem;
+                gap: 0.8rem;
+            }
+
+            .play-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
             }
 
             .volume-control {
                 width: 100%;
+            }
+
+            .minimize-btn {
+                width: 30px;
+                height: 30px;
+                top: 0.3rem;
+                right: 0.3rem;
+            }
+
+            .minimize-btn i {
+                font-size: 0.9rem;
             }
         }
 
@@ -1563,28 +1933,34 @@
     <div class="cursor-dot"></div>
 
     <!-- LIVE SYSTEM DASHBOARD -->
-    <div class="system-dashboard">
-        <h4><i class="fas fa-chart-line"></i> SYSTEM STATUS</h4>
-        <div class="stat-item">
-            <span class="stat-label">Status</span>
-            <span class="stat-value">
-                <span class="status-dot"></span>
-                Online
-            </span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-label">Active Projects</span>
-            <span class="stat-value">2</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-label">Last Login</span>
-            <span class="stat-value">Today</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-label">Visitors</span>
-            <span class="stat-value">
-                <span class="visitor-count" id="visitorCount">0</span>
-            </span>
+    <div class="system-dashboard" id="systemDashboard">
+        <button class="dashboard-minimize-btn" id="dashboardMinimizeBtn">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <div class="dashboard-content">
+            <h4><i class="fas fa-chart-line"></i> SYSTEM STATUS</h4>
+            <div class="stat-item">
+                <span class="stat-label">Status</span>
+                <span class="stat-value">
+                    <span class="status-dot"></span>
+                    Online
+                </span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Active Projects</span>
+                <span class="stat-value">2</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Last Login</span>
+                <span class="stat-value">Today</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Visitors</span>
+                <span class="stat-value">
+                    <span class="visitor-count" id="visitorCount">Calculating<span class="dots"></span></span>
+                </span>
+            </div>
         </div>
     </div>
 
@@ -1598,7 +1974,7 @@
 
     <div class="container">
         <header>
-            <div class="logo">S4riX</div>
+            <div class="logo">S4RiX</div>
             <nav>
                 <a href="#about">ABOUT</a>
                 <a href="#apps">APPS & AI</a>
@@ -1621,7 +1997,7 @@
                 <h1>Welcome to my Portfolio</h1>
                 <p class="description">
                     15-year-old content creator and developer from Switzerland. Working for Zilan Group. 
-                    Building the future, one line of code at a time. Also known as "S4riX" / "Sari" / "Sintand" / "Sarikaze"
+                    Building the future, one line of code at a time. Also known as "Shizuka_Fan" / "Sari" / "Sintand" / "Sarikaze"
                 </p>
                 
                 <div class="typing-wrapper">
@@ -1648,7 +2024,7 @@
                         <li>Switzerland 🇨🇭</li>
                         <li>Working for: Zilan Group</li>
                         <li>Vibe: Chill, nice & funny</li>
-                        <li>Developer of Xaver</li>
+                        <li>Developer of ZilanOS</li>
                     </ul>
                 </div>
 
@@ -1661,7 +2037,6 @@
                         <li>Gaming 🎮</li>
                         <li>Music Listening 🎵</li>
                         <li>Watching Anime 😁</li>
-                        <li>Editing 🎬</li>
                     </ul>
                 </div>
             </div>
@@ -1795,9 +2170,9 @@
                     <h3>Instagram</h3>
                 </a>
 
-                <a href="https://discord.gg/U2fU9bWUXF" class="social-link" style="--index: 3">
+                <a href="#" class="social-link" style="--index: 3">
                     <i class="fab fa-discord"></i>
-                    <h3>Discord Server</h3>
+                    <h3>Discord</h3>
                 </a>
 
                 <a href="https://s4rixzilandev.github.io/" target="_blank" class="social-link" style="--index: 4">
@@ -1828,47 +2203,53 @@
     </div>
 
     <!-- MUSIC PLAYER -->
-    <div class="music-player">
-        <div class="music-header">
-            <i class="fas fa-music music-icon"></i>
-            <div class="music-info">
-                <h4>Unforgettable Flow</h4>
-                <p>Produced by S4riX</p>
+    <div class="music-player" id="musicPlayer">
+        <button class="minimize-btn" id="minimizeBtn">
+            <i class="fas fa-chevron-down"></i>
+        </button>
+
+        <div class="music-content">
+            <div class="music-header">
+                <i class="fas fa-music music-icon"></i>
+                <div class="music-info">
+                    <h4>Unforgettable Flow</h4>
+                    <p>Produced by S4riX</p>
+                </div>
             </div>
-        </div>
 
-        <!-- Audio Visualizer -->
-        <div class="visualizer" id="visualizer">
-            <div class="visualizer-bar"></div>
-            <div class="visualizer-bar"></div>
-            <div class="visualizer-bar"></div>
-            <div class="visualizer-bar"></div>
-            <div class="visualizer-bar"></div>
-            <div class="visualizer-bar"></div>
-            <div class="visualizer-bar"></div>
-            <div class="visualizer-bar"></div>
-            <div class="visualizer-bar"></div>
-            <div class="visualizer-bar"></div>
-        </div>
-
-        <!-- Player Controls -->
-        <div class="player-controls">
-            <button class="play-btn" id="playBtn">
-                <i class="fas fa-play"></i>
-            </button>
-            <div class="volume-control">
-                <i class="fas fa-volume-up"></i>
-                <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="70">
+            <!-- Audio Visualizer -->
+            <div class="visualizer" id="visualizer">
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
             </div>
-        </div>
 
-        <!-- Progress Bar -->
-        <div class="progress-container" id="progressContainer">
-            <div class="progress-bar" id="progressBar"></div>
-        </div>
-        <div class="time-display">
-            <span id="currentTime">0:00</span>
-            <span id="duration">0:00</span>
+            <!-- Player Controls -->
+            <div class="player-controls">
+                <button class="play-btn" id="playBtn">
+                    <i class="fas fa-play"></i>
+                </button>
+                <div class="volume-control">
+                    <i class="fas fa-volume-up"></i>
+                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="70">
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="time-display">
+                <span id="currentTime">0:00</span>
+                <span id="duration">0:00</span>
+            </div>
         </div>
 
         <!-- Hidden Audio Element -->
@@ -1934,7 +2315,7 @@
         // Typing Effect
         const texts = [
             "Also known as Sarikaze/Sintand",
-            "Creator/Founder/Owner of Xaver Development",
+            "Building ZilanOS",
             "Content Creator & Gamer",
             "15 years old from Switzerland 🇨🇭",
             "Developer for Zilan Group",
@@ -1973,42 +2354,30 @@
 
         setTimeout(typeEffect, 1000);
 
-        // VISITOR COUNTER - PERSISTENT & ACCURATE
-        const visitorElement = document.getElementById('visitorCount');
-        
-        function initVisitorCounter() {
-            // Get stored visitor count from localStorage
-            let storedCount = localStorage.getItem('s4rix_visitor_count');
-            
-            if (!storedCount) {
-                // First time visitor - start at a base number
-                storedCount = 150;
-            } else {
-                // Increment by 1 for returning visitors (simulates real visits)
-                storedCount = parseInt(storedCount) + 1;
-            }
-            
-            // Save the new count
-            localStorage.setItem('s4rix_visitor_count', storedCount);
-            
-            // Animate the counter
-            let current = 0;
-            const target = parseInt(storedCount);
-            const duration = 2000;
-            const step = target / (duration / 50);
-            
-            const interval = setInterval(() => {
-                current += step;
-                if (current >= target) {
-                    visitorElement.textContent = Math.floor(target);
-                    clearInterval(interval);
-                } else {
-                    visitorElement.textContent = Math.floor(current);
-                }
-            }, 50);
-        }
+        // SYSTEM DASHBOARD MINIMIZE/MAXIMIZE
+        const systemDashboard = document.getElementById('systemDashboard');
+        const dashboardMinimizeBtn = document.getElementById('dashboardMinimizeBtn');
 
-        initVisitorCounter();
+        dashboardMinimizeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            systemDashboard.classList.toggle('minimized');
+            
+            const icon = dashboardMinimizeBtn.querySelector('i');
+            if (systemDashboard.classList.contains('minimized')) {
+                icon.className = 'fas fa-chart-line';
+            } else {
+                icon.className = 'fas fa-chevron-left';
+            }
+        });
+
+        // Click on minimized dashboard to expand
+        systemDashboard.addEventListener('click', () => {
+            if (systemDashboard.classList.contains('minimized')) {
+                systemDashboard.classList.remove('minimized');
+                const icon = dashboardMinimizeBtn.querySelector('i');
+                icon.className = 'fas fa-chevron-left';
+            }
+        });
 
         // DARK MODE TOGGLE
         const modeToggle = document.getElementById('modeToggle');
@@ -2099,12 +2468,24 @@
         // Set initial volume
         audio.volume = 0.7;
 
-        // Play/Pause Toggle
+        // Play/Pause Toggle with error handling
         playBtn.addEventListener('click', () => {
             if (audio.paused) {
-                audio.play();
-                playBtnIcon.className = 'fas fa-pause';
-                startVisualizer();
+                // Try to play
+                const playPromise = audio.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        // Playback started successfully
+                        playBtnIcon.className = 'fas fa-pause';
+                        startVisualizer();
+                    }).catch(error => {
+                        // Auto-play was prevented or error occurred
+                        console.log('Playback prevented:', error);
+                        // Reset button
+                        playBtnIcon.className = 'fas fa-play';
+                    });
+                }
             } else {
                 audio.pause();
                 playBtnIcon.className = 'fas fa-play';
@@ -2119,27 +2500,47 @@
 
         // Update Progress Bar
         audio.addEventListener('timeupdate', () => {
-            const progress = (audio.currentTime / audio.duration) * 100;
-            progressBar.style.width = progress + '%';
-            currentTimeDisplay.textContent = formatTime(audio.currentTime);
+            if (audio.duration) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressBar.style.width = progress + '%';
+                currentTimeDisplay.textContent = formatTime(audio.currentTime);
+            }
         });
 
         // Set Duration when loaded
         audio.addEventListener('loadedmetadata', () => {
-            durationDisplay.textContent = formatTime(audio.duration);
+            if (audio.duration && !isNaN(audio.duration)) {
+                durationDisplay.textContent = formatTime(audio.duration);
+            }
+        });
+
+        // Handle when audio can play
+        audio.addEventListener('canplay', () => {
+            if (audio.duration && !isNaN(audio.duration)) {
+                durationDisplay.textContent = formatTime(audio.duration);
+            }
+        });
+
+        // Error handling
+        audio.addEventListener('error', (e) => {
+            console.error('Audio error:', e);
+            playBtnIcon.className = 'fas fa-exclamation-circle';
         });
 
         // Click on progress bar to seek
         progressContainer.addEventListener('click', (e) => {
-            const rect = progressContainer.getBoundingClientRect();
-            const clickX = e.clientX - rect.left;
-            const width = rect.width;
-            const percentage = clickX / width;
-            audio.currentTime = percentage * audio.duration;
+            if (audio.duration) {
+                const rect = progressContainer.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const width = rect.width;
+                const percentage = clickX / width;
+                audio.currentTime = percentage * audio.duration;
+            }
         });
 
         // Format time helper
         function formatTime(seconds) {
+            if (!seconds || isNaN(seconds)) return '0:00';
             const mins = Math.floor(seconds / 60);
             const secs = Math.floor(seconds % 60);
             return `${mins}:${secs.toString().padStart(2, '0')}`;
@@ -2172,7 +2573,37 @@
         // Loop audio when it ends
         audio.addEventListener('ended', () => {
             audio.currentTime = 0;
-            audio.play();
+            playBtnIcon.className = 'fas fa-play';
+            stopVisualizer();
+        });
+
+        // Try to preload audio metadata
+        audio.load();
+
+        // MUSIC PLAYER MINIMIZE/MAXIMIZE
+        const musicPlayer = document.getElementById('musicPlayer');
+        const minimizeBtn = document.getElementById('minimizeBtn');
+
+        minimizeBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent event bubbling
+            musicPlayer.classList.toggle('minimized');
+            
+            // Change icon based on state
+            const icon = minimizeBtn.querySelector('i');
+            if (musicPlayer.classList.contains('minimized')) {
+                icon.className = 'fas fa-music';
+            } else {
+                icon.className = 'fas fa-chevron-down';
+            }
+        });
+
+        // Click on minimized player to expand
+        musicPlayer.addEventListener('click', () => {
+            if (musicPlayer.classList.contains('minimized')) {
+                musicPlayer.classList.remove('minimized');
+                const icon = minimizeBtn.querySelector('i');
+                icon.className = 'fas fa-chevron-down';
+            }
         });
     </script>
 </body>
